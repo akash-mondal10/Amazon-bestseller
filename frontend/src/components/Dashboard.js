@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { BookOpen, TrendingUp, DollarSign, Users, Filter } from 'lucide-react';
+import { BookOpen, Filter } from 'lucide-react';
 import SummaryCards from './SummaryCards';
 import TopAuthorsChart from './TopAuthorsChart';
 import GenreChart from './GenreChart';
@@ -11,6 +10,9 @@ import PriceRatingChart from './PriceRatingChart';
 import CorrelationHeatmap from './CorrelationHeatmap';
 import BooksTable from './BooksTable';
 import InsightsPanel from './InsightsPanel';
+import SearchBar from './SearchBar';
+import MLPrediction from './MLPrediction';
+import ExportButtons from './ExportButtons';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
@@ -100,6 +102,12 @@ const Dashboard = () => {
                 ))}
               </SelectContent>
             </Select>
+
+            <div className="flex-1" />
+            
+            <SearchBar />
+            
+            <ExportButtons selectedYear={selectedYear} selectedGenre={selectedGenre} />
           </div>
         </div>
       </header>
@@ -140,6 +148,9 @@ const Dashboard = () => {
               <CorrelationHeatmap />
             </div>
           </div>
+          
+          {/* ML Predictions */}
+          <MLPrediction />
           
           {/* Books Table */}
           <BooksTable selectedYear={selectedYear} selectedGenre={selectedGenre} />
